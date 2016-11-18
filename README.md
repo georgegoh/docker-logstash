@@ -17,4 +17,17 @@ deploying on ocp
 	# oc volume dc/logstash --add --name=dockerlog --type=hostPath --mount-path=/var/log --path=/var/log
 	# oc volume dc/logstash --add --name=varlibdockercontainers --type=hostPath --mount-path=/var/lib/docker/containers --path=/var/lib/docker/containers
 
+make sure the volume mounts and the priviledged security context is in the dc, e.g. :
 
+	 ports:
+        - containerPort: 9600
+          protocol: TCP
+        resources: {}
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /var/log
+          name: dockerlog
+        - mountPath: /var/lib/docker/containers
+          name: varlibdockercontainers
