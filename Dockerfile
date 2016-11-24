@@ -13,7 +13,6 @@ RUN /usr/share/logstash/bin/logstash-plugin install /tmp/logstash-output-syslog-
 
 # logstash conf file
 COPY container-logs.conf /opt/logstash/conf.d/
-COPY ops-logs.conf /opt/logstash/conf.d/
 
 # logstash settings file
 COPY logstash.yml /opt/logstash/
